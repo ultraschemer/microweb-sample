@@ -17,8 +17,26 @@ depends_on = None
 
 
 def upgrade():
-    pass
+    # Create the table 'image' only with data fields. The boilerplate fields (like id, created_at, etc)
+    # will be created later
+    op.create_table('image')
 
+    # The 'image' relation store read-only registers. These registers are of type Createable. So, set the table as
+    # a 'createable' entity - and this function will generate all boilerplate fields to fulfill the needs of a
+    # 'createable' entity:
+    op.set_createable('image')
+
+    op.create_table('user__image')
+    op.set_createable('user__image')
+
+    op.create_table('document')
+    op.set_timeable('document')
+
+    op.create_table('user__document')
+    op.set_createable('user__document')
 
 def downgrade():
-    pass
+    op.drop_table('user__document')
+    op.drop_table('document')
+    op.drop_table('user__image')
+    op.drop_table('image')
