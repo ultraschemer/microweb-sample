@@ -41,8 +41,8 @@ def upgrade():
         sa.Column('entity_name', sa.String(1024), nullable=False),
         sa.Column('entity_id', entity_id_type, nullable=False),
         sa.Column('entity_data', sa.Text, nullable=False),
-        sa.Column('create_date', sa.types.TIMESTAMP(timezone=True), nullable=False, 
-            server_default=sa.func.now()))
+        sa.Column('create_date', sa.types.TIMESTAMP(timezone=True), nullable=False,
+                  server_default=sa.func.now()))
 
     # Create the general configurations table:
     op.create_table(
