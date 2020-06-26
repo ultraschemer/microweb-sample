@@ -82,7 +82,7 @@ def upgrade():
                     sa.Column('contents', sa.Text(), nullable=False),
                     # A status for document. 'regular' is de default document status, and its default format too.
                     # Other status can be set in the future.
-                    sa.Column('status', sa.Text(), nullable=False, server_default='regular'))
+                    sa.Column('status', sa.String(16), nullable=False, server_default='regular'))
 
     # Documents are quintessentially Timeable:
     op.set_timeable('document')
