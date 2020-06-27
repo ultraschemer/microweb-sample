@@ -10,33 +10,34 @@ import com.ultraschemer.microweb.vertx.WebAppVerticle;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 
+// 1. Specialize WebAppVerticle:
 public class App extends WebAppVerticle {
     static {
-        // 1. Initialize default entity util here:
+        // 2. Initialize default entity util here:
         EntityUtil.initialize();
     }
 
     @Override
     public void initialization() throws Exception {
-        // 2. Verify the default user and the default role:
+        // 3. Verify the default user and the default role:
         UserManagement.initializeRoot();
 
-        // 3. Initialize additional roles (if not using KeyCloak):
+        // 4. Initialize additional roles (if not using KeyCloak):
         RoleManagement.initializeDefault();
 
-        // 4. Registra os filtros de inicialização:
+        // 5. Register initialization filter:
         registerFilter(new AuthorizationFilter());
 
-        // 5. Register the controllers:
+        // 6. Register controllers:
         registerController(HttpMethod.POST, "/v0/login", new LoginController());
         registerController(HttpMethod.GET, "/v0/logoff", new LogoffController());
     }
 
     public static void main(String[] args) {
-        // 6. Create an Application Vertx instance. Vert.x is, to Microweb, the entire application component container:
+        // 7. Create the Application Vertx instance:
         Vertx vertx = Vertx.vertx();
 
-        // 7. Deploy the WebAppVerticle:
+        // 8. Deploy the WebAppVerticle:
         vertx.deployVerticle(new App());
     }
 }
