@@ -24,8 +24,11 @@ repositories {
 }
 
 dependencies {
-    // This dependency is used by the application.
+    // The entire Microweb framework:
     implementation 'com.ultraschemer.microweb:microweb:0.5.0'
+
+    // Database driver:
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.4'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
