@@ -25,7 +25,7 @@ public class App extends WebAppVerticle {
         // 4. Initialize additional roles (if not using KeyCloak):
         RoleManagement.initializeDefault();
 
-        // 5. Register initialization filter:
+        // 5. Register authorization filter:
         registerFilter(new AuthorizationFilter());
 
         // 6. Register controllers:
