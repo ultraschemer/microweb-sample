@@ -1,6 +1,5 @@
 package microweb.sample;
 
-import com.ultraschemer.microweb.controller.AuthorizationFilter;
 import com.ultraschemer.microweb.controller.LoginController;
 import com.ultraschemer.microweb.controller.LogoffController;
 import com.ultraschemer.microweb.domain.RoleManagement;
@@ -10,6 +9,7 @@ import com.ultraschemer.microweb.vertx.WebAppVerticle;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.handler.StaticHandler;
+import microweb.sample.controller.AuthorizationFilter;
 import microweb.sample.controller.DefaultHomePageController;
 import microweb.sample.controller.GuiUserLoginProcessController;
 import microweb.sample.controller.GuiUserLoginViewController;
