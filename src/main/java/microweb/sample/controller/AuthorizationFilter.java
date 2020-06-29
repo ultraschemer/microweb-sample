@@ -5,5 +5,8 @@ public class AuthorizationFilter extends com.ultraschemer.microweb.controller.Au
         super();
         this.addUnfilteredPath("/");
         this.addUnfilteredPath("/v0");
+
+        // Add this, to release the login form to any unauthenticated user:
+        this.addUnfilteredPath("/v0/gui-user-login");
     }
 }

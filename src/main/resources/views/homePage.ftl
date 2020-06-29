@@ -6,6 +6,7 @@
     <title>Microweb Sample</title>
 </head>
 <body>
-    This is Microweb generated Home Page!
+    <p>This is Microweb generated Home Page!</p>
+    <p> Login <a href="/v0/gui-user-login">here</a>.</p>
 </body>
 </html>
