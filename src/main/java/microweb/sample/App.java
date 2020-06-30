@@ -9,10 +9,7 @@ import com.ultraschemer.microweb.vertx.WebAppVerticle;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.handler.StaticHandler;
-import microweb.sample.controller.AuthorizationFilter;
-import microweb.sample.controller.DefaultHomePageController;
-import microweb.sample.controller.GuiUserLoginProcessController;
-import microweb.sample.controller.GuiUserLoginViewController;
+import microweb.sample.controller.*;
 
 // 1. Specialize WebAppVerticle:
 public class App extends WebAppVerticle {
@@ -47,9 +44,12 @@ public class App extends WebAppVerticle {
         // L.2: Login submission handling:
         registerController(HttpMethod.POST, "/v0/gui-user-login", new GuiUserLoginProcessController());
 
+        registerController(HttpMethod.GET, "/v0/gui-user-logoff", new GuiUserLogoffProcessController());
+
         // L.3:  Default system home page handling:
         registerController(HttpMethod.GET, "/v0", new DefaultHomePageController());
         registerController(HttpMethod.GET, "/", new DefaultHomePageController());
+
     }
 
     public static void main(String[] args) {

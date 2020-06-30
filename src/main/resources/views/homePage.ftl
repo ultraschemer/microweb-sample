@@ -7,6 +7,11 @@
 </head>
 <body>
     <p>This is Microweb generated Home Page!</p>
-    <p> Login <a href="/v0/gui-user-login">here</a>.</p>
+    <#if logged>
+        <p>Welcome <strong>${user.name}</strong>!</p>
+        <p>Logoff <a href="/v0/gui-user-logoff">here</a>.</p>
+    <#else>
+        <p>Login <a href="/v0/gui-user-login">here</a>.</p>
+    </#if>
 </body>
 </html>

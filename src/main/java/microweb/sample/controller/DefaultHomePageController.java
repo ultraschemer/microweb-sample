@@ -47,6 +47,7 @@ public class DefaultHomePageController extends SimpleController {
             // Get user data:
             User u = AuthManagement.authorize(authorizationToken.getValue());
             homepageDataRoot.put("logged", true);
+            homepageDataRoot.put("user", u);
         } else {
             homepageDataRoot.put("logged", false);
         }
