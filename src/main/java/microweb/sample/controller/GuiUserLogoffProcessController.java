@@ -7,6 +7,9 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
 import microweb.sample.view.FtlHelper;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GuiUserLogoffProcessController extends SimpleController {
     private static Template homePageTemplate = null;
 
@@ -30,9 +33,14 @@ public class GuiUserLogoffProcessController extends SimpleController {
 
         // Perform logoff here:
         AuthManagement.unauthorize(token);
+        Map<String, Object> homepageDataRoot = new HashMap<>();
+        homepageDataRoot.put("logged", false);
 
         // Render home page again:
-
+        routingContext
+                .response()
+                .putHeader("Content-type", "text/html")
+                .end(FtlHelper.processToString(homePageTemplate, homepageDataRoot));
 
     }
 }

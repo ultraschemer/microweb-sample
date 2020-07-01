@@ -3,6 +3,7 @@ package microweb.sample.controller;
 import com.ultraschemer.microweb.domain.AuthManagement;
 import com.ultraschemer.microweb.domain.bean.AuthenticationData;
 import com.ultraschemer.microweb.domain.bean.AuthorizationData;
+import com.ultraschemer.microweb.entity.User;
 import com.ultraschemer.microweb.error.StandardException;
 import com.ultraschemer.microweb.validation.Validator;
 import com.ultraschemer.microweb.vertx.SimpleController;
@@ -53,6 +54,12 @@ public class GuiUserLoginProcessController extends SimpleController {
             // D.3: Business call:
             AuthorizationData authorizationData = AuthManagement.authenticate(authenticationData);
 
+            // Populate view:
+            Map<String, Object> homepageDataRoot = new HashMap<>();
+            User u = AuthManagement.authorize(authorizationData.getAccessToken());
+            homepageDataRoot.put("logged", true);
+            homepageDataRoot.put("user", u);
+
             // D.4: Success - evaluate returned values:
             response
                     // Set authorization cookie:
@@ -60,7 +67,7 @@ public class GuiUserLoginProcessController extends SimpleController {
                     // Render template:
                     .putHeader("Content-type", "text/html")
                     .setStatusCode(200)
-                    .end(FtlHelper.processToString(homePageTemplate, null));
+                    .end(FtlHelper.processToString(homePageTemplate, homepageDataRoot));
         } catch(StandardException e) {
             // D.5: Business call failure, return to login form, but with error message:
             Map<String, Object> loginMessageData = new HashMap<>();
