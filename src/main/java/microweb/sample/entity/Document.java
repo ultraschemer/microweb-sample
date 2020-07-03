@@ -5,6 +5,7 @@ import com.ultraschemer.microweb.persistence.Timeable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.UUID;
 
 @Entity
 @Table(name = "document")
@@ -17,6 +18,9 @@ public class Document extends Timeable {
 
     @Column(name = "status")
     private String status;
+
+    @Column(name="owner_user_id")
+    private UUID ownerUserId;
 
     public String getName() {
         return name;
@@ -40,5 +44,13 @@ public class Document extends Timeable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public UUID getOwnerUserId() {
+        return ownerUserId;
+    }
+
+    public void setOwnerUserId(UUID ownerUserId) {
+        this.ownerUserId = ownerUserId;
     }
 }
