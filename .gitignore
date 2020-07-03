@@ -89,6 +89,7 @@ atlassian-ide-plugin.xml
 
 # vertx cache
 .vertx
+/file-uploads
 
 # Jmeter
 /jmeter/jmeter.log

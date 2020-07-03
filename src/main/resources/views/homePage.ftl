@@ -10,6 +10,28 @@
     <#if logged>
         <p>Welcome <strong>${user.name}</strong>!</p>
         <p>Logoff <a href="/v0/gui-user-logoff">here</a>.</p>
+        <hr/>
+        <p>Add image here:</p>
+        <form action="/v0/image" method="post" enctype="multipart/form-data">
+            <table style="width: 100%">
+                <tr>
+                    <td style="width: 30%">Name:</input></td>
+                    <td>File:</td>
+                </tr>
+                <tr>
+                    <td style="width: 30%"><input name="fileName" style="width: 100%" type="text"></input></td>
+                    <td style="padding-left: 10px"><input name="fileData" style="width: 100%" type="file"></input></td>
+                </tr>
+            </table>
+            <input type="submit" value="Send"></input>
+        </form>
+        <hr/>
+        <p><strong>Your images here:</strong></p>
+        <table style="width: 100%">
+        <tr>
+            <td>Name:</td><td>Owner:</td><td>Alias:</td><td>Download Link:</td>
+        </tr>
+        </table>
     <#else>
         <p>Login <a href="/v0/gui-user-login">here</a>.</p>
     </#if>

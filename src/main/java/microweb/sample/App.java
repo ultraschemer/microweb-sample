@@ -46,6 +46,10 @@ public class App extends WebAppVerticle {
 
         registerController(HttpMethod.GET, "/v0/gui-user-logoff", new GuiUserLogoffProcessController());
 
+        // Image manipulation:
+        registerController(HttpMethod.POST, "/v0/image", new GuiImageCreationController());
+
+
         // L.3:  Default system home page handling:
         registerController(HttpMethod.GET, "/v0", new DefaultHomePageController());
         registerController(HttpMethod.GET, "/", new DefaultHomePageController());
