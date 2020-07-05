@@ -48,7 +48,7 @@ public class GuiImageCreationController extends SimpleController {
         // Process upload:
         for (FileUpload f : uploads) {
             // Verify file extension:
-            if(!f.fileName().toLowerCase().matches("^.*\\.(jpg|jpeg|png|bmp|tiff|pdf)$")) {
+            if(!f.fileName().toLowerCase().matches("^.*\\.(jpg|jpeg|png|bmp|tiff|svg|ico|gif|webp)$")) {
                 // Delete file:
                 new File(f.uploadedFileName()).delete();
                 throw new ValidationException("Unexpected format for an image. Use files with these extensions: jpg, jpeg, png, bmp, tiff or pdf");

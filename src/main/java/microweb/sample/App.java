@@ -48,6 +48,8 @@ public class App extends WebAppVerticle {
 
         // Image manipulation:
         registerController(HttpMethod.POST, "/v0/image", new GuiImageCreationController());
+        registerController(HttpMethod.GET, "/v0/image/:id", new GuiImageDetailsController());
+        registerController(HttpMethod.GET, "/v0/image/:id/raw", new GuiImageRawDataController());
 
 
         // L.3:  Default system home page handling:
