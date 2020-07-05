@@ -26,12 +26,25 @@
             <input type="submit" value="Send"></input>
         </form>
         <hr/>
+        <#if (images?size > 0) >
         <p><strong>Your images here:</strong></p>
         <table style="width: 100%">
         <tr>
-            <td>Name:</td><td>Owner:</td><td>Alias:</td><td>Download Link:</td>
+            <td>Name:</td>
+            <td>Owner:</td>
+            <td>Alias:</td>
+            <td>Details:</td>
         </tr>
+        <#list images as image>
+            <tr>
+                <td>${image.name}</td>
+                <td>${image.ownerName}</td>
+                <td><#if image.alias??>${image.alias}</#if></td>
+                <td><a href="/v0/image/${image.id}"><strong>+</strong></a></td>
+            </tr>
+        </#list>
         </table>
+        </#if>
     <#else>
         <p>Login <a href="/v0/gui-user-login">here</a>.</p>
     </#if>

@@ -5,16 +5,20 @@ import com.ultraschemer.microweb.domain.bean.AuthenticationData;
 import com.ultraschemer.microweb.domain.bean.AuthorizationData;
 import com.ultraschemer.microweb.entity.User;
 import com.ultraschemer.microweb.error.StandardException;
+import com.ultraschemer.microweb.persistence.EntityUtil;
 import com.ultraschemer.microweb.validation.Validator;
 import com.ultraschemer.microweb.vertx.SimpleController;
 import freemarker.template.Template;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
+import microweb.sample.domain.ImageManagement;
+import microweb.sample.domain.bean.ImageListingData;
 import microweb.sample.domain.bean.UserLoginData;
 import microweb.sample.view.FtlHelper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GuiUserLoginProcessController extends SimpleController {
@@ -59,6 +63,11 @@ public class GuiUserLoginProcessController extends SimpleController {
             User u = AuthManagement.authorize(authorizationData.getAccessToken());
             homepageDataRoot.put("logged", true);
             homepageDataRoot.put("user", u);
+
+            // Load images, if they are available for this user:
+            ImageManagement imageManagement = new ImageManagement(EntityUtil.getSessionFactory(), routingContext.vertx());
+            List<ImageListingData> imageListingData = imageManagement.list(u);
+            homepageDataRoot.put("images", imageListingData);
 
             // D.4: Success - evaluate returned values:
             response

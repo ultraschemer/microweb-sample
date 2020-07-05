@@ -2,7 +2,6 @@ package microweb.sample.domain;
 
 import com.ultraschemer.microweb.entity.User;
 import com.ultraschemer.microweb.error.StandardException;
-import com.ultraschemer.microweb.persistence.Identifiable;
 import com.ultraschemer.microweb.validation.Validator;
 import io.vertx.core.Vertx;
 import microweb.sample.domain.bean.ImageListingData;
@@ -70,7 +69,9 @@ public class ImageManagement extends StandardDomain {
             List<ImageListingData> res = new LinkedList<>();
 
             List<User_Image> accessibleImageList =
-                    session.createQuery("from User_Image where userId = :uid", User_Image.class).list();
+                    session.createQuery("from User_Image where userId = :uid", User_Image.class)
+                            .setParameter("uid", user.getId())
+                            .list();
             HashMap<UUID, User_Image> userImageMap = new HashMap<>();
             accessibleImageList.forEach((i) -> userImageMap.put(i.getImageId(), i));
 
