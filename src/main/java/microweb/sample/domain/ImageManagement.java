@@ -128,7 +128,7 @@ public class ImageManagement extends StandardDomain {
                     .setParameter("iid", imageId)
                     .getSingleResult();
 
-            if(!image.getOwnerUserId().equals(imageId)) {
+            if(!image.getOwnerUserId().equals(user.getId())) {
                 // Verify if the user has access to such image:
                 List<User_Image> userImageList = session.createQuery("from User_Image where imageId = :iid and userId = :uid",
                         User_Image.class).setParameter("iid", imageId).setParameter("uid", user.getId())

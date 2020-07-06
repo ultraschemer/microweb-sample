@@ -1,6 +1,8 @@
 package microweb.sample.controller;
 
 import com.ultraschemer.microweb.domain.AuthManagement;
+import com.ultraschemer.microweb.domain.UserManagement;
+import com.ultraschemer.microweb.domain.bean.UserData;
 import com.ultraschemer.microweb.entity.User;
 import com.ultraschemer.microweb.persistence.EntityUtil;
 import com.ultraschemer.microweb.vertx.SimpleController;
@@ -13,6 +15,7 @@ import microweb.sample.domain.ImageManagement;
 import microweb.sample.domain.bean.ImageListingData;
 import microweb.sample.view.FtlHelper;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,17 +58,23 @@ public class DefaultHomePageController extends SimpleController {
             ImageManagement imageManagement = new ImageManagement(EntityUtil.getSessionFactory(), routingContext.vertx());
             List<ImageListingData> imageListingData = imageManagement.list(u);
 
+            // Load users, to assign images to them:
+            List<UserData> users = UserManagement.loadUsers(1000, 0);
+            users.sort(Comparator.comparing(UserData::getName));
+
             homepageDataRoot.put("logged", true);
             homepageDataRoot.put("user", u);
             homepageDataRoot.put("images", imageListingData);
+            homepageDataRoot.put("users", users);
         } else {
             homepageDataRoot.put("logged", false);
         }
 
         // C.4: In the controller evaluation routine, render the template:
         routingContext
-                 .response()
-                 .putHeader("Content-type", "text/html")
-                 .end(FtlHelper.processToString(homePageTemplate, homepageDataRoot));
+                .response()
+                .putHeader("Content-type", "text/html")
+                .putHeader("Cache-Control", "no-cache")
+                .end(FtlHelper.processToString(homePageTemplate, homepageDataRoot));
     }
 }

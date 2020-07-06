@@ -33,14 +33,32 @@
             <td>Name:</td>
             <td>Owner:</td>
             <td>Alias:</td>
-            <td>Details:</td>
+            <td>Download:</td>
+            <td>Send to:</td>
         </tr>
         <#list images as image>
             <tr>
                 <td>${image.name}</td>
                 <td>${image.ownerName}</td>
                 <td><#if image.alias??>${image.alias}</#if></td>
-                <td><a href="/v0/image/${image.id}"><strong>+</strong></a></td>
+                <td><a href="/v0/image/${image.id}/raw"><strong>&#8595;</strong></a></td>
+                <td>
+                    <#if (user.name == image.ownerName)>
+                        <form>
+                        Alias:
+                        <input type="text"/>
+                        User:
+                        <select>
+                            <#list users as u>
+                                <#if (u.name != user.name)>
+                                    <option value="${user.id}">${user.name}</option>
+                                </#if>
+                            </#list>
+                        </select>
+                        <input type="submit" value="&#8594;"/>
+                        </form>
+                    </#if>
+                </td>
             </tr>
         </#list>
         </table>

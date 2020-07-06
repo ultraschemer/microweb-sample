@@ -85,18 +85,11 @@ public class GuiImageCreationController extends SimpleController {
                         throw e;
                     }
 
-                    // Now, render user interface - load all image data, synchronously, since we're already in
-                    // an asynchronous call:
-                    List<ImageListingData> imageListingData = imageManagement.list(u);
-                    Map<String, Object> homepageDataRoot = new HashMap<>();
-
-                    homepageDataRoot.put("logged", true);
-                    homepageDataRoot.put("user", u);
-                    homepageDataRoot.put("images", imageListingData);
-
-                    context.response()
-                            .putHeader("Content-type", "text/html")
-                            .end(FtlHelper.processToString(homePageTemplate, homepageDataRoot));
+                    // Redirect home:
+                    response.putHeader("Content-type", "text/html")
+                            .putHeader("Location", "/v0")
+                            .setStatusCode(303)
+                            .end();
                 });
             });
         }
