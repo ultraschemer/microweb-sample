@@ -9,7 +9,7 @@
     <p>This is Microweb generated Home Page!</p>
     <#if logged>
         <p>Welcome <strong>${user.name}</strong>!</p>
-        <p>Logoff <a href="/v0/gui-user-logoff">here</a>.</p>
+        <p>Logoff <a href="/v0/gui-user-logoff">here</a> | Manage <a href="/v0/gui-user-management">users</a></p>
         <hr/>
         <p>Add image here:</p>
         <form action="/v0/image" method="post" enctype="multipart/form-data">
