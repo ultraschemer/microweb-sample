@@ -12,7 +12,7 @@
         <p>Logoff <a href="/v0/gui-user-logoff">here</a> | Manage <a href="/v0/gui-user-management">users</a></p>
         <hr/>
         <p>Add image here:</p>
-        <form action="/v0/image" method="post" enctype="multipart/form-data">
+        <form action="/v0/gui-image" method="post" enctype="multipart/form-data">
             <table style="width: 100%">
                 <tr>
                     <td style="width: 30%">Name:</input></td>
@@ -41,10 +41,10 @@
                 <td>${image.name}</td>
                 <td>${image.ownerName}</td>
                 <td><#if image.alias??>${image.alias}</#if></td>
-                <td><a href="/v0/image/${image.id}/raw"><strong>&#8595;</strong></a></td>
+                <td><a href="/v0/gui-image/${image.id}/raw"><strong>&#8595;</strong></a></td>
                 <td>
                     <#if (user.name == image.ownerName)>
-                        <form method="post" action="/v0/image/${image.id}/assign">
+                        <form method="post" action="/v0/gui-image/${image.id}/assign">
                             Alias:
                             <input type="text" name="alias"/>
                             User:

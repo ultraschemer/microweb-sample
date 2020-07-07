@@ -1,16 +1,15 @@
 package microweb.sample.controller;
 
-import com.ultraschemer.microweb.entity.User;
 import com.ultraschemer.microweb.error.StandardException;
 import com.ultraschemer.microweb.persistence.EntityUtil;
 import com.ultraschemer.microweb.vertx.SimpleController;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
 import microweb.sample.domain.ImageManagement;
 import microweb.sample.entity.Image;
 
-import io.vertx.core.buffer.Buffer;
 import java.util.UUID;
 
 public class GuiImageRawDataController extends SimpleController {

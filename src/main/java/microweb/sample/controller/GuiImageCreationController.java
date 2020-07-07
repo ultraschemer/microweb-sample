@@ -9,13 +9,13 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import microweb.sample.domain.ImageManagement;
-import microweb.sample.domain.bean.ImageListingData;
 import microweb.sample.domain.bean.ImageRegistrationData;
 import microweb.sample.view.FtlHelper;
 
 import javax.xml.bind.ValidationException;
 import java.io.File;
-import java.util.*;
+import java.util.Set;
+import java.util.UUID;
 
 public class GuiImageCreationController extends SimpleController {
     private static Template homePageTemplate = null;
@@ -51,7 +51,7 @@ public class GuiImageCreationController extends SimpleController {
             if(!f.fileName().toLowerCase().matches("^.*\\.(jpg|jpeg|png|bmp|tiff|svg|ico|gif|webp)$")) {
                 // Delete file:
                 new File(f.uploadedFileName()).delete();
-                throw new ValidationException("Unexpected format for an image. Use files with these extensions: jpg, jpeg, png, bmp, tiff or pdf");
+                throw new ValidationException("Unexpected format for an image. Use files with these extensions: jpg, jpeg, png, bmp, tiff, svg, ico, gif or webp.");
             }
 
             //
