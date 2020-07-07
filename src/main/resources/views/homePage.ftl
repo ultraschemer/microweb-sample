@@ -44,18 +44,18 @@
                 <td><a href="/v0/image/${image.id}/raw"><strong>&#8595;</strong></a></td>
                 <td>
                     <#if (user.name == image.ownerName)>
-                        <form>
-                        Alias:
-                        <input type="text"/>
-                        User:
-                        <select>
-                            <#list users as u>
-                                <#if (u.name != user.name)>
-                                    <option value="${user.id}">${user.name}</option>
-                                </#if>
-                            </#list>
-                        </select>
-                        <input type="submit" value="&#8594;"/>
+                        <form method="post" action="/v0/image/${image.id}/assign">
+                            Alias:
+                            <input type="text" name="alias"/>
+                            User:
+                            <select name="userId">
+                                <#list users as u>
+                                    <#if (u.name != user.name)>
+                                        <option value="${u.id}">${u.name}</option>
+                                    </#if>
+                                </#list>
+                            </select>
+                            <input type="submit" value="&#8594;"/>
                         </form>
                     </#if>
                 </td>

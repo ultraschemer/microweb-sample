@@ -47,8 +47,9 @@ public class App extends WebAppVerticle {
         registerController(HttpMethod.GET, "/v0/gui-user-logoff", new GuiUserLogoffProcessController());
 
         // Image manipulation:
-        registerController(HttpMethod.POST, "/v0/image", new GuiImageCreationController());
+        registerController(HttpMethod.POST, "/v0/image/:id/assign", new GuiImageAssignController());
         registerController(HttpMethod.GET, "/v0/image/:id/raw", new GuiImageRawDataController());
+        registerController(HttpMethod.POST, "/v0/image", new GuiImageCreationController());
 
         // User management:
         registerController(HttpMethod.GET, "/v0/gui-user-management", new GuiUserManagementController());
