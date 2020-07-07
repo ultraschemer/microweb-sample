@@ -1,5 +1,6 @@
 package microweb.sample.controller;
 
+import com.ultraschemer.microweb.domain.RoleManagement;
 import com.ultraschemer.microweb.domain.UserManagement;
 import com.ultraschemer.microweb.domain.bean.UserData;
 import com.ultraschemer.microweb.vertx.SimpleController;
@@ -37,6 +38,7 @@ public class GuiUserManagementController extends SimpleController {
         Map<String, Object> dataRoot = new HashMap<>();
         dataRoot.put("user", routingContext.get("user"));
         dataRoot.put("users", users);
+        dataRoot.put("roles", RoleManagement.loadAllRoles());
         routingContext
                 .response()
                 .putHeader("Content-type", "text/html")

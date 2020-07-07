@@ -52,6 +52,7 @@ public class App extends WebAppVerticle {
 
         // User management:
         registerController(HttpMethod.GET, "/v0/gui-user-management", new GuiUserManagementController());
+        registerController(HttpMethod.POST, "/v0/gui-user/:id/role", new GuiAssignRoleController());
         registerController(HttpMethod.POST, "/v0/gui-user", new GuiCreateUserController());
 
         // L.3:  Default system home page handling:
