@@ -61,9 +61,10 @@
                 </td>
                 <td>
                     <form action="/v0/gui-user/${u.id}/role" method="post">
-                        <select>
+                        <input type="hidden" name="userId" value="${u.id}"/>
+                        <select name="role">
                             <#list roles as r>
-                                <option value="${r.id}">${r.name}</option>
+                                <option value="${r.name}">${r.name}</option>
                             </#list>
                         </select>
                         <input type="submit" value="&#8594;"/>
