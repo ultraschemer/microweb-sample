@@ -2,6 +2,8 @@ package microweb.sample;
 
 import com.ultraschemer.microweb.controller.LoginController;
 import com.ultraschemer.microweb.controller.LogoffController;
+import com.ultraschemer.microweb.controller.UserCreationController;
+import com.ultraschemer.microweb.controller.UserPasswordUpdateController;
 import com.ultraschemer.microweb.domain.RoleManagement;
 import com.ultraschemer.microweb.domain.UserManagement;
 import com.ultraschemer.microweb.persistence.EntityUtil;
@@ -55,6 +57,13 @@ public class App extends WebAppVerticle {
         registerController(HttpMethod.GET, "/v0/gui-user-management", new GuiUserManagementController());
         registerController(HttpMethod.POST, "/v0/gui-user/:id/role", new GuiAssignRoleController());
         registerController(HttpMethod.POST, "/v0/gui-user", new GuiCreateUserController());
+
+        // REST API calls:
+        registerController(HttpMethod.POST, "/v0/user", new UserCreationController());
+        registerController(HttpMethod.GET, "/v0/user/:id", new UserReadManagementController());
+        registerController(HttpMethod.PATCH, "/v0/user/:id/password", new UserPasswordUpdateController());
+        registerController(HttpMethod.POST, "/v0/image", new ImageCreateController());
+        registerController(HttpMethod.PUT, "/b0/image/:id/link", new ImageUserLinkController());
 
         // L.3:  Default system home page handling:
         registerController(HttpMethod.GET, "/v0", new DefaultHomePageController());
