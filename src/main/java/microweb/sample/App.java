@@ -1,17 +1,18 @@
 package microweb.sample;
 
-import com.ultraschemer.microweb.controller.LoginController;
-import com.ultraschemer.microweb.controller.LogoffController;
-import com.ultraschemer.microweb.controller.UserCreationController;
-import com.ultraschemer.microweb.controller.UserPasswordUpdateController;
+import com.ultraschemer.microweb.controller.*;
 import com.ultraschemer.microweb.domain.RoleManagement;
 import com.ultraschemer.microweb.domain.UserManagement;
+import com.ultraschemer.microweb.entity.User;
 import com.ultraschemer.microweb.persistence.EntityUtil;
 import com.ultraschemer.microweb.vertx.WebAppVerticle;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.ext.web.handler.StaticHandler;
 import microweb.sample.controller.*;
+import microweb.sample.controller.AuthorizationFilter;
+
+import javax.print.attribute.standard.MediaSize;
 
 // 1. Specialize WebAppVerticle:
 public class App extends WebAppVerticle {
@@ -35,6 +36,9 @@ public class App extends WebAppVerticle {
 
         // 5. Register authorization filter:
         registerFilter(new AuthorizationFilter());
+
+        // Register permission filter here:
+        registerFilter(new PermissionControlFilter());
 
         // 6. Register controllers:
         registerController(HttpMethod.POST, "/v0/login", new LoginController());
@@ -60,7 +64,8 @@ public class App extends WebAppVerticle {
 
         // REST API calls:
         registerController(HttpMethod.POST, "/v0/user", new UserCreationController());
-        registerController(HttpMethod.GET, "/v0/user/:id", new UserReadManagementController());
+        registerController(HttpMethod.GET, "/v0/user", new UserController());
+        registerController(HttpMethod.GET, "/v0/user/:userIdOrName", new OtherUsersController());
         registerController(HttpMethod.PATCH, "/v0/user/:id/password", new UserPasswordUpdateController());
         registerController(HttpMethod.POST, "/v0/image", new ImageCreateController());
         registerController(HttpMethod.PUT, "/b0/image/:id/link", new ImageUserLinkController());
