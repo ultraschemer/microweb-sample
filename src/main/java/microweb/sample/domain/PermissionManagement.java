@@ -34,7 +34,7 @@ public class PermissionManagement {
                 }
 
                 // Block all restricted paths:
-                return !Resource.resourceIsEquivalentToPath("GET /v0/gui-user-management#", path, method) &&
+                return  !Resource.resourceIsEquivalentToPath("GET /v0/gui-user-management#", path, method) &&
                         !Resource.resourceIsEquivalentToPath("POST /v0/gui-user/:id/role#", path, method) &&
                         !Resource.resourceIsEquivalentToPath("POST /v0/gui-user#", path, method) &&
                         !Resource.resourceIsEquivalentToPath("POST /v0/user#", path, method) &&
