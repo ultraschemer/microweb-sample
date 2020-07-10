@@ -20,7 +20,9 @@ public class PermissionManagement {
      */
     public static boolean evaluatePermission(User u, String path, String method) {
         try {
+            // If user is given by controller, than authorization has been evaluated.
             if(u != null) {
+                // In the case of a valid authorization, it's necessary to evaluate permissions:
                 List<Role> roleList = UserManagement.loadRolesFromUser(u.getId());
                 Set<String> roleSet = roleList.stream().map(Role::getName).collect(Collectors.toSet());
                 Set<String> restrictRoleSet = new HashSet<>();
@@ -40,6 +42,7 @@ public class PermissionManagement {
                         !Resource.resourceIsEquivalentToPath("POST /v0/user#", path, method) &&
                         !Resource.resourceIsEquivalentToPath("GET /v0/user/:userIdOrName#", path, method);
             } else {
+                // Any route without required authorization is automatically permitted:
                 return true;
             }
         } catch(Exception e) {
