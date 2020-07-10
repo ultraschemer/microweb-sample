@@ -21,7 +21,7 @@ public class PermissionControlFilter extends SimpleController {
             // Reached a restricted path - which is forbidden.
             response.setStatusCode(403)
                     .putHeader("Content-type", "text/html")
-                    .end("<html><body>Forbidden</body></html>");
+                    .end("<html><body><h1>Forbidden</h1></body></html>");
         }
     }
 }
