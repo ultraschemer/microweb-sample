@@ -76,7 +76,7 @@ public class ImageManagement extends StandardDomain {
             // A.6: Commit saved data:
             session.getTransaction().commit();
         } catch(Exception e) {
-            throw new ImageManagmentSaveBase64RepresentationError("Unable to save image data", e);
+            throw new ImageManagementSaveBase64RepresentationError("Unable to save image data", e);
         }
     }
 
